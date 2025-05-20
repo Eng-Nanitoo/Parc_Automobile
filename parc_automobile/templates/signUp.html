@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/signIn.css' %}">
+</head>
+<body>
+    <main>
+        <form action="/user/auth/register" method="POST">
+            {% csrf_token %}
+            <div class="username">
+                <input type="text" name="username" placeholder="Nom de profil" required>
+            </div>
+            <div class="name">
+                <input type="text" name="nom" placeholder="Nom" required>
+            </div>
+            <div class="name">
+                <input type="text" name="prenom" placeholder="Prenom" required>
+            </div>
+            <div class="email">
+                <input type="email" name="email" placeholder="Adresse email" required>
+            </div>
+            <div class="password">
+                <input type="password" name="password" placeholder="Mot de passe" required>
+            </div>
+
+            <div class="submit">
+                <button type="submit">Register</button>
+            </div>
+
+            <div class="register">
+                <a href="/auth/login">You already have an account? <span>Login</span></a>
+                <p>Vous Etes un conducteur? <span>Cliquez Ici</span></p>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

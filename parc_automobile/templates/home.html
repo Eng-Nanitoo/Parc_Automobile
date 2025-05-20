@@ -1,0 +1,119 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'css/home.css'%}">
+</head>
+<body>
+
+        <header>
+            <div>
+                <h1>Dashbord</h1>
+            </div>
+            <nav>
+                <form action="/search" method="POST">
+                    <label for=""><i class='bx bx-search'></i></label>
+                    <input type="search" name="search" id="" placeholder="Search something...">
+                </form>
+            </nav>
+            <div class="buttons">
+                <ul>
+                    <li><a href=""><i class='bx bxs-envelope'></i></a></li>
+                    <li><a onclick="dropNotification()" style="cursor:pointer"><i class='bx bxs-bell'></i></a></li>
+                    <li><a href="/profile/{{user.username}}"><img src="/media/{{user.image}}" alt=""></a></li>
+                </ul>
+            </div>
+        </header>
+        <div id="notifications">
+            <div class="noti">
+                <p>Notifications</p>
+                <p><i class='bx bx-x'></i></p>
+            </div>
+            {%for notification in notifications%}
+            <div class="notification">
+                <h4>{{notification.type}}</h4>
+                <div class="noti_Infos flex">
+                    <p>{{notification.description}}</p>
+                    <p>{{notification.when.date}}</p>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        <div class="container">
+            <aside>
+                <ul>
+                    <li><a href="#" class="active">Vehicules</a></li>
+                    <li><a href="#">Conducteurs</a></li>
+                    <li><a href="#">Rapporter</a></li>
+                    <li><a href="#">Parametres</a></li>
+                </ul>
+                <a href="/auth/logout"><i class='bx bx-log-out'></i> Log out</a>
+            </aside>
+            <main class="main">
+                <h1>Vehicules</h1>
+                <div class="vehicules">
+                    {% for vehicule in vehicules%}
+                    <section>
+                        <h4>{{vehicule.marque}} {{vehicule.modele}}</h4>
+                        <div class="image">
+                            <img src="/media/{{vehicule.image}}" alt="">
+                        </div>
+                        <div class="infos">
+                            <div class="informations">
+                                <p>Kilometrage: {{vehicule.kilometrage}}</p>
+                                <p>Type Carburant: {{vehicule.type_carburant}}</p>
+                            </div>
+                            <div class="more">
+                                <p>Immatriculation: {{vehicule.immatriculation}}</p>
+                                <p>Status: {{vehicule.statut}}</p>
+                                {% if vehicule.statut == "Disponible"%}
+                                <form action="">
+                                    <button type="submit" class="disponible">Send Request</button>
+                                </form>
+                                {% else %}
+                                <button disabled class="indisponible">Disponible Soon</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+                    {% endfor %}
+                </div>
+                <h1>Conducteurs</h1>
+                <div class="vehicules">
+                    {% for conducteur in conducteurs%}
+                    <section>
+                        <h4>{{conducteur.marque}} {{conducteur.modele}}</h4>
+                        <div class="image">
+                            <img src="/media/{{conducteur.image}}" alt="">
+                        </div>
+                        <div class="infos">
+                            <div class="informations">
+                                <p>Nom Complet: {{conducteur.nom}} {{conducteur.prenom}}</p>
+                                <p>Email: {{conducteur.email}}</p>
+                            </div>
+                            <!-- <div class="more">
+                                <p>Immatriculation: {{vehicule.immatriculation}}</p>
+                                <p>Status: {{vehicule.statut}}</p>
+                                {% if vehicule.statut == "Disponible"%}
+                                <form action="">
+                                    <button type="submit" class="disponible">Send Request</button>
+                                </form>
+                                {% else %}
+                                <button disabled class="indisponible">Disponible Soon</button>
+                                {% endif %}
+                            </div> -->
+                        </div>
+                    </section>
+                    {% endfor %}
+                </div>
+            </main>
+        </div>
+        
+        <script src="{% static 'js/script.js'%}"></script>
+    </body>
+</html>

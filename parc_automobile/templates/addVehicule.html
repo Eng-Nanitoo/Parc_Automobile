@@ -1,0 +1,57 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/addVehicule.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <main>
+        <form action="/vehicules/add" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid1">
+                <div>
+                    <label for="">Marque</label>
+                    <input type="text" name="marque" id="">
+                </div>
+                <div>
+                    <label for="">Modele</label>
+                    <input type="text" name="modele" id="">
+                </div>
+            </div>
+            <div class="grid2">
+                <div>
+                    <label for="">Immatriculation</label>
+                    <input type="text" name="immatriculation" id="">
+                </div>
+                <div>
+                    <label for="">Date Achat</label>
+                    <input type="date" name="date_achat" id="">
+                </div>
+            </div>
+            <div>
+                <label for="">Kilometrage</label>
+                <input type="text" name="kilometrage" id="">
+            </div>
+            <div>
+                <label for="">Type Carburant</label>
+                <input type="text" name="type_carburant" id="">
+            </div>
+            <div>
+                <div class="file-drop-area">
+                    <input class="file-input" type="file" name="image" id="image" />
+                    <p><i class='bx bx-upload'></i></p>
+                    <span class="file-msg">Glissez-déposez une image ici ou cliquez pour parcourir</span>
+                </div>
+
+                <button type="submit">Enregistrer</button>
+
+            </div>
+        </form>
+    </main>
+</body>
+</html>

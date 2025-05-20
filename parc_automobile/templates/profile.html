@@ -1,0 +1,54 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+  <title>Profil Utilisateur</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/profile.css'%}">
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2><a href="/home">{{user.username}}</a></h2>
+    <a href="#">Tableau de bord</a>
+    <a href="#">Profil</a>
+    <a href="#">Paramètres</a>
+    <a href="/auth/logout">Déconnexion</a>
+  </div>
+
+  <div class="main">
+    <div class="profile-container">
+      <h2>Profil Utilisateur</h2>
+      <form action="/update/profile" method="post" id="form">
+        {%csrf_token%}
+        <div class="form-group">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" name="username" value="{{user.username}}">
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" value="{{user.nom}}">
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prenom</label>
+          <input type="text" id="prenom" name="prenom" value="{{user.prenom}}">
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse Email</label>
+          <input type="email" id="email" name="email" value="{{user.email}}">
+        </div>
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input type="tel" id="phone" name="phone" value="{{user.phone}}" oninput="checkPhone()" maxlength="8">
+          <span id="phoneError"></span>
+        </div>
+        <button onclick="checkPhone()" class="submit-btn">Mettre à jour</button>
+      </form>
+    </div>
+  </div>
+  <script src="{%static 'js/profile.js'%}"></script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/signIn.css' %}">
+</head>
+<body>
+    
+    {% if messages %}
+    <div class="error">
+        <p>Incorrect username or password.</p>
+    </div>
+    {% endif %}
+    <main>
+        <form action="/user/auth/login" method="POST">
+            {% csrf_token %}
+            <div class="username">
+                <input type="text" name="username" placeholder="Nom de profil" required>
+            </div>
+            <div class="password">
+                <input type="password" name="password" placeholder="Mot de passe" required>
+            </div>
+
+            <div class="submit">
+                <button type="submit">Login</button>
+            </div>
+
+            <div class="register">
+                <a href="/auth/register">You don't have an account? <span>Register</span></a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
