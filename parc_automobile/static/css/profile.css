@@ -1,112 +1,148 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
-  }
-  #phoneError {
-    margin-top: 10px;
-    color: red;
-    font-size: .8em;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    outline: none;
 }
 
-  body {
+body {
+    background-color: #222222;
+    padding-top: 2em;
     font-family: 'Inter', sans-serif;
-    background-color: #f4f6f8;
-    display: flex;
+    /* background-image: url("bg-profile.avif"); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     min-height: 100vh;
-  }
+}
+main {
+    width: 40%;
+    padding: 3px;
+    margin-inline: auto;
+    background-color: #0c0e12;
+    border-radius: 20px;
+}
 
-  .sidebar {
-    width: 220px;
-    background-color: #1f2937;
-    color: white;
-    padding: 2rem 1rem;
-  }
-
-  .sidebar h2 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .sidebar a {
-    display: block;
-    color: #d1d5db;
-    text-decoration: none;
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: 0.3s;
-  }
-
-  .sidebar a:hover {
-    background-color: #374151;
-    color: white;
-  }
-
-  .main {
-    flex-grow: 1;
-    padding: 2rem;
-  }
-
-  .profile-container {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 800px;
-    margin: auto;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-
-  .profile-container h2 {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #374151;
-    font-weight: 600;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"] {
+main section .head {
+    height: 100px;
+}
+main section .head img{
+    border-radius: 20px;
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    transition: border-color .3s;
-  }
+    height: 100%;
+    object-fit: cover;
+}
+main section .body {
+    padding-inline: 15px;
+}
+main section .body .nav {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+main section .body .nav .image{
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+main section .body .nav .image img {
+    border: 2.5px solid #0c0e12;
+    position: absolute;
+    top: -70%;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+main section .body .nav .buttons a{
+    font-size: .85em;
+    opacity: .8;
+    padding: 5px 15px;
+    margin-inline: 5px;
+    border-radius: 5px;
+    border: .5px solid #444;
+}
+main section .body .user_informations {
+    margin-bottom: 10px;
+}
+main section .body .user_informations h2 {
+    font-size: 1.25em;
+}
+main section .body .user_informations  p {
+    opacity: .5;
+    font-size: .8em;
+}
+main section .body .user_infos{
+    margin-block: 20px;
+    display: flex;
+    gap: 10px;
+}
+main section .body .user_infos section:not(:first-child) {
+    border-left: .75px solid #424242;
+    padding-left: 20px;
+}
+main section .body .user_infos section p {
+    opacity: .5;
+    font-size: .8em;
+}
+main section .body .user_infos section h3 {
+    margin-top: 5px;
+    font-size: .85em;
+    font-weight: 500;
+}
+main section .body  .user_data section{
+    display: grid;
+    grid-template-columns: 120px auto;
+    gap: 10px;
+    padding-block: 20px;
+    border-block: .5px solid #1f1f1f;
+}
+main section .body  .user_data section .inputs {
+    display: flex;
+    gap: 10px;
+}
+main section .body  .user_data section label {
+    font-size: .8em;
+}
+main section .body  .user_data section .inputs input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: .5px solid #1f1f1f;
+    background-color: transparent;
+}
+main section .body .changes {
+    margin-block: 20px;
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+}
+main section .body .changes button {
+    font-size: .8em;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: .5px solid #1f1f1f;
+}
+main section .body .changes button:first-child{
+    background-color: transparent;
+}
+main section .body .changes button:last-child{
+    background-color: rgba(237, 237, 237, 0.05);
 
-  input:focus {
-    border-color: #3b82f6;
-    outline: none;
-  }
-
-  .submit-btn {
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .submit-btn:hover {
-    background-color: #2563eb;
-  }
-
-  @media (max-width: 768px) {
-    .sidebar {
-      display: none;
-    }
-    .main {
-      padding: 1rem;
-    }
-  }
+    color: rgb(240, 240, 240);
+}
+main > section{
+  position: relative;
+}
+main section .back{
+  position:absolute;
+  right: 10px;
+  top: 5px;
+  font-size: .8em;
+}

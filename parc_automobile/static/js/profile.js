@@ -17,7 +17,7 @@ function checkPhone(){
         return true
     }
 
-    else if(phone[0] != "2" || phone[0] != "3" || phone[0] != "4"){
+    else if(phone[0] != "2" && phone[0] != "3" && phone[0] != "4"){
         span.innerHTML = "Numero doit commence par 2,3 ou 4"
     }
 

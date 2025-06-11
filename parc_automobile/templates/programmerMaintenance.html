@@ -1,0 +1,56 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/programmerMaintenance.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <main>
+        <form action="/ajouter/maintenance" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid1">
+                <div>
+                    <label for="">Marque</label>
+                    <select name="vehicule" id="" required>
+                        {% for vehicule in vehicules%}
+                        <option value="{{vehicule.id}}">{{vehicule.marque}} {{vehicule.modele}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div>
+                    <label for="">Type Maintenance</label>
+                    <input type="text" name="type_maintenance">
+                </div>
+                <div>
+                    <label for="">Depense</label>
+                    <input type="text" name="depense" id="" required>
+                </div>
+            </div>
+            <div class="grid2">
+                <div>
+                    <label for="">Description</label>
+                    <textarea name="description" id="" placeholder="Enter a description about the Maintenance" required>
+                    </textarea>
+                </div>
+                <div>
+                    <label for="">Date</label>
+                    <input type="date" name="date" id="" required>
+                </div>
+            </div>
+            <div>
+                <button type="submit">Enregistrer</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
+
+
+
+
+

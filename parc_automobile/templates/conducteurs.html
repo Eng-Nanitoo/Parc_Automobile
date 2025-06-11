@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Utilisateurs</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .conducteurs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .conducteurs-table th, .conducteurs-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            text-align: left;
+        }
+
+        .conducteurs-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .conducteurs-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .action-buttons a {
+            margin-right: 8px;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .view-btn { background-color: #17a2b8; color: white; }
+        .edit-btn { background-color: #ffc107; color: black; }
+        .delete-btn { background-color: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+
+    <h1>Liste des Utilisateurs</h1>
+
+    <table class="conducteurs-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Numéro Permis</th>
+                <th>Téléphone</th>
+                <th>Can Drive</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for conducteur in conducteurs %}
+            <tr>
+                <td><img src="/media/{{ conducteur.image }}" alt="Profil" class="profile-img"></td>
+                <td>{{ conducteur.nom }}</td>
+                <td>{{ conducteur.prenom }}</td>
+                <td>{{ conducteur.email }}</td>
+                <td>{{ conducteur.get_role_display }}</td>
+                <td>{{ conducteur.numero_permis|default:"—" }}</td>
+                <td>{{ conducteur.phone|default:"—" }}</td>
+                <td><select name="" id=""><option value="">Yes</option><option value="">No</option></select></td>
+                <td class="action-buttons">
+                    <a href="/Utilisateurs/supprimer/{{ conducteur.id }}" class="delete-btn" onclick="return confirm('Supprimer cet utilisateur ?')">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" style="text-align: center;">Aucun utilisateur trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

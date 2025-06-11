@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello {{name}}</h1>
+    <main>
+        {%for vehicule in vehicules%}
+        <div>
+            <h1>{{vehicule.marque}}</h1>
+            <p>{{vehicule.modele}}</p>
+        </div>
+        {%endfor%}
+    </main>
+</body>
+</html>

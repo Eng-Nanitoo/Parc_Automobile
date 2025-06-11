@@ -1,119 +1,110 @@
 {%load static%}
+{% load django_browser_reload %}
+{% django_browser_reload_script %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/home.css'%}">
+    <link rel="stylesheet" href="{%static 'css/header.css'%}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{%static 'css/home.css'%}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
-
         <header>
-            <div>
-                <h1>Dashbord</h1>
+            <div class="header">
+                <div class="division">
+                    <div>
+                        <h1>Parc Automobile</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="/dashbord">Vehicules</a></li>
+                            <li><a href="/conducteurs">Conducteurs</a></li>
+                            <li><a href="/profile/{{user.username}}">Settings</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="buttons">
+                    <ul>
+                        <li><a href=""><i class='bx bxs-envelope'></i></a></li>
+<li class="notification-wrapper">
+    <a onclick="dropNotification()" style="cursor:pointer; position: relative;">
+        <i class='bx bxs-bell'></i>
+    </a>
+    <div id="notificationDropdown" class="notification-dropdown">
+        {% if notifications %}
+            {% for notification in notifications %}
+                <div class="notification-item {{ message.tags }}">
+                    {{ notification.description }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="notification-item">Aucune notification</div>
+        {% endif %}
+    </div>
+</li>
+                        <li><a href="/profile/{{user.username}}"><img src="/media/{{user.image}}" alt=""></a></li>
+                    </ul>
+                </div>
             </div>
-            <nav>
+            <div class="search">
                 <form action="/search" method="POST">
                     <label for=""><i class='bx bx-search'></i></label>
                     <input type="search" name="search" id="" placeholder="Search something...">
                 </form>
-            </nav>
-            <div class="buttons">
-                <ul>
-                    <li><a href=""><i class='bx bxs-envelope'></i></a></li>
-                    <li><a onclick="dropNotification()" style="cursor:pointer"><i class='bx bxs-bell'></i></a></li>
-                    <li><a href="/profile/{{user.username}}"><img src="/media/{{user.image}}" alt=""></a></li>
-                </ul>
             </div>
         </header>
-        <div id="notifications">
-            <div class="noti">
-                <p>Notifications</p>
-                <p><i class='bx bx-x'></i></p>
-            </div>
-            {%for notification in notifications%}
-            <div class="notification">
-                <h4>{{notification.type}}</h4>
-                <div class="noti_Infos flex">
-                    <p>{{notification.description}}</p>
-                    <p>{{notification.when.date}}</p>
+        <main>
+            <div class="container">
+                <div class="head">
+                    <div class="greeting">
+                        <p>Take a look on all the vehicules</p>
+                        <h1>Welcome {{user.nom}} In Automobile Parc</h1>
+                    </div>
+                    <div class="nav">
+                        <p>Discover The Full Vehicules </p>
+                        <a href="/dashbord">See More</a>
+                    </div>
                 </div>
             </div>
-            {%endfor%}
-        </div>
-        <div class="container">
-            <aside>
-                <ul>
-                    <li><a href="#" class="active">Vehicules</a></li>
-                    <li><a href="#">Conducteurs</a></li>
-                    <li><a href="#">Rapporter</a></li>
-                    <li><a href="#">Parametres</a></li>
-                </ul>
-                <a href="/auth/logout"><i class='bx bx-log-out'></i> Log out</a>
-            </aside>
-            <main class="main">
-                <h1>Vehicules</h1>
-                <div class="vehicules">
-                    {% for vehicule in vehicules%}
-                    <section>
-                        <h4>{{vehicule.marque}} {{vehicule.modele}}</h4>
-                        <div class="image">
-                            <img src="/media/{{vehicule.image}}" alt="">
-                        </div>
-                        <div class="infos">
-                            <div class="informations">
-                                <p>Kilometrage: {{vehicule.kilometrage}}</p>
-                                <p>Type Carburant: {{vehicule.type_carburant}}</p>
-                            </div>
-                            <div class="more">
-                                <p>Immatriculation: {{vehicule.immatriculation}}</p>
-                                <p>Status: {{vehicule.statut}}</p>
-                                {% if vehicule.statut == "Disponible"%}
-                                <form action="">
-                                    <button type="submit" class="disponible">Send Request</button>
-                                </form>
-                                {% else %}
-                                <button disabled class="indisponible">Disponible Soon</button>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </section>
-                    {% endfor %}
-                </div>
-                <h1>Conducteurs</h1>
-                <div class="vehicules">
-                    {% for conducteur in conducteurs%}
-                    <section>
-                        <h4>{{conducteur.marque}} {{conducteur.modele}}</h4>
-                        <div class="image">
-                            <img src="/media/{{conducteur.image}}" alt="">
-                        </div>
-                        <div class="infos">
-                            <div class="informations">
-                                <p>Nom Complet: {{conducteur.nom}} {{conducteur.prenom}}</p>
-                                <p>Email: {{conducteur.email}}</p>
-                            </div>
-                            <!-- <div class="more">
-                                <p>Immatriculation: {{vehicule.immatriculation}}</p>
-                                <p>Status: {{vehicule.statut}}</p>
-                                {% if vehicule.statut == "Disponible"%}
-                                <form action="">
-                                    <button type="submit" class="disponible">Send Request</button>
-                                </form>
-                                {% else %}
-                                <button disabled class="indisponible">Disponible Soon</button>
-                                {% endif %}
-                            </div> -->
-                        </div>
-                    </section>
-                    {% endfor %}
-                </div>
-            </main>
-        </div>
+        </main>
         
-        <script src="{% static 'js/script.js'%}"></script>
-    </body>
+        {% if messages %}
+        <script>
+            {% for message in messages %}
+            Swal.fire({
+                icon: "{% if 'error' in message.tags %}error{% elif 'warning' in message.tags %}warning{% else %}info{% endif %}",
+                title: "{{ message|escapejs }}",
+                confirmButtonText: "OK"
+            });
+            {% endfor %}
+        </script>
+        {% endif %}
+
+        <script>
+            function dropNotification() {
+                const dropdown = document.getElementById("notificationDropdown");
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            }
+
+            // Optional: click outside to close
+            document.addEventListener('click', function(event) {
+                const dropdown = document.getElementById("notificationDropdown");
+                const bell = document.querySelector('.notification-wrapper');
+
+                if (!bell.contains(event.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+        </script>
+
+
+
+</body>
 </html>

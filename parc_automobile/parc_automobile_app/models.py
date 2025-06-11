@@ -10,16 +10,42 @@ class Vehicule(models.Model):
     immatriculation = models.CharField(max_length=50, unique=True)
     date_achat = models.DateField()
     kilometrage = models.PositiveIntegerField()
-    type_carburant = models.CharField(max_length=50)
-    image = models.ImageField(upload_to = 'vehicules_images')
-    
+    color = models.CharField(max_length = 20,null=True)
+    type_vehicule = models.CharField(max_length = 50)
+
+    TRANSMISSION_CHOICES = [
+        ('Automatic','AUTOMATIC' ),
+        ('Triptronic','TRIPTRONIC'),
+        ('Manual','MANUAL'),
+    ]
+    VehiculeType_CHOICES = [
+        ('Van','Van' ),
+        ('Truck','Truck'),
+        ('MVP','MVP'),
+        ('SUV','SUV'),
+        ('Double Cabin','Double Cabin'),
+        ('Wagon','Wagon'),
+        ('Sedan','Sedan'), 
+        ('Hatchback','Hatchback'), 
+        ('Coupe','Coupe'), 
+        ('Sport','Sport'), 
+    ]
+
     STATUS_CHOICES = [
         ('Disponible', 'DISPONIBLE'),
         ('En maintenance', 'EN_MAINTENANCE'),
         ('En cours d\'utilisation', 'UTILISATION'),
     ]
+    type_vehicule = models.CharField(null = True,choices=VehiculeType_CHOICES)
+    transmission = models.CharField(max_length=50,choices=TRANSMISSION_CHOICES,null=True)
+    type_carburant = models.CharField(max_length=50)
+    image = models.ImageField(upload_to = 'vehicules_images')
+    
 
     statut = models.CharField(max_length=50, choices=STATUS_CHOICES, default='DISPONIBLE')
+
+    def __str__(self):
+        return self.marque + " " + self.modele
 
 class Utilisateur(AbstractUser):
     nom = models.CharField(max_length=100)
@@ -35,8 +61,10 @@ class Utilisateur(AbstractUser):
         ('GESTIONNAIRE', 'Gestionnaire'),
         ('ADMIN', 'Admin'),
     ]
+    canDrive = models.BooleanField(null=True)
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES,default="CONDUCTEUR")
+    
 class Trajet(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     Utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)

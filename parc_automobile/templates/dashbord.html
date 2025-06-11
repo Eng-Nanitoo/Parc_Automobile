@@ -1,0 +1,199 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/dashbord.css'%}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+        <header>
+            <div class="header">
+                <div class="division">
+                    <div>
+                        <h1>Parc Automonile</h1>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="">Home</a></li>
+                            <li><a href="">Vehicules</a></li>
+                            <li><a href="/conducteurs">Conducteurs</a></li>
+                            {%if user.role == "ADMIN"%}
+                              <li><a href="/ajouter/vehicule">Ajouter Vehicule</a></li>
+                              <li><a href="#" onclick="dropRapport(); return false;">Rapports</a></li>
+                            {%endif%}
+                            {%if user.role == "GESTIONNAIRE"%}
+                              <li><a href="/Programmer/maintenance">Programmer Maintenance</a></li>
+                            {%endif%}
+                            <li><a href="">Settings</a></li>
+                        </ul>
+                      </nav>
+                    </div>
+                <div class="buttons">
+                    <ul>
+                        <li><a href=""><i class='bx bxs-envelope'></i></a></li>
+                        <li><a onclick="dropNotification()" style="cursor:pointer"><i class='bx bxs-bell'></i></a></li>
+                        <li><a href="/profile/{{user.username}}"><img src="/media/{{user.image}}" alt=""></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="search">
+                <form action="." method="GET">
+                  
+                    <label for=""><i class='bx bx-search'></i></label>
+                    <input type="search" name="search" id="" placeholder="Search something...">
+                </form>
+            </div>
+        </header>
+        <main>
+            <aside>
+                <form action="." method="get">
+                  <div class="head">
+                    <h4>Filter</h4>
+                    <button type="reset">Reset</button>
+                  </div>
+                  <div class="location">
+                    <label for="location">Location</label>
+                    <select name="location" id="location">
+                      <option value="">All</option>
+                      <option value="Nouakchott">Nouakchott</option>
+                      <option value="Atar">Atar</option>
+                      <option value="Chinguitti">Chinguitti</option>
+                    </select>
+                  </div>
+
+                  <div class="brand">
+                    <label for="brand">Car's Brand</label>
+                    <select name="brand" id="brand">
+                      <option value="">All</option>
+                      <option value="lamborgini">Lamborgini</option>
+                      <option value="bugatti">Bugatti</option>
+                      <option value="mercedes">Mercedes</option>
+                    </select>
+                  </div>
+
+                  <div class="type">
+                    <label>Car's Type</label>
+                    <div class="choices" data-group="type">
+                      <label><input type="checkbox" name="type" value="Truck"> Truck</label>
+                      <label><input type="checkbox" name="type" value="Van"> Van</label>
+                      <label><input type="checkbox" name="type" value="Motorcycle"> Motorcycle</label>
+                      <label><input type="checkbox" name="type" value="Sport"> Sport</label>
+                    </div>
+                  </div>
+
+                  <div class="color">
+                    <label for="color">Color</label>
+                    <select name="color" id="color">
+                      <option value="">All</option>
+                      <option value="WHite">White</option>
+                      <option value="Black">Black</option>
+                      <option value="Blue">Blue</option>
+                      <option value="Grey">Grey</option>
+                    </select>
+                  </div>
+
+                  <div class="transmission">
+                    <label>Transmission</label>
+                    <div class="choices" data-group="transmission">
+                      <label><input type="checkbox" name="transmission" value="Automatic"> Automatic</label>
+                      <label><input type="checkbox" name="transmission" value="Triptronic"> Triptronic</label>
+                      <label><input type="checkbox" name="transmission" value="Manual"> Manual</label>
+                    </div>
+                  </div>
+
+                  <div class="fuel">
+                    <label>Fuel Type</label>
+                    <div class="choices" data-group="fuel">
+                      <label><input type="checkbox" name="fuel" value="Diesel"> Diesel</label>
+                      <label><input type="checkbox" name="fuel" value="Petrol"> Petrol</label>
+                      <label><input type="checkbox" name="fuel" value="Electric"> Electric</label>
+                      <label><input type="checkbox" name="fuel" value="Hybrid"> Hybrid</label>
+                    </div>
+                  </div>
+
+                  <div class="submit">
+                    <button type="submit">Filter</button>
+                  </div>
+                </form>
+
+            </aside>
+            <section class="container">
+                {% for vehicule in vehicules%}
+                  {% if user.role == "ADMIN" %}
+                      <a href="/vehicule/{{vehicule.id}}"> 
+                        <article>
+                            <h4>{{vehicule.marque}}</h4>
+                            <p>{{vehicule.type_vehicule}} {{vehicule.transmission}}</p>
+                            <figure>
+                                <img src="/media/{{vehicule.image}}" alt="">
+                            </figure>
+                            <figcaption>
+                                <div class="brand">
+                                    <h4>{{vehicule.marque}}</h4>
+                                    <p>{{vehicule.modele}}</p>
+                                </div>
+                                <div class="modele">
+                                    <p>{{vehicule.date_achat}}</p>
+                                    <p>{{vehicule.kilometrage}} km</p>
+                                </div>
+                            </figcaption>
+                            {% if user.role != "ADMIN"%}
+                              {%if vehicule.statut == "Disponible"%}
+                              <a class="carRequest" href="/reserve/car/{{vehicule.id}}/{{user.username}}">Send Request</a>
+                              {%else%}
+                              <a class="carRequest">Disponible Soon</a>
+                              {% endif %}
+                            {%endif%}
+                          </article>
+                      </a>
+                  {%else%}
+                      <article>
+                      <h4>{{vehicule.marque}}</h4>
+                      <p>{{vehicule.date_achat}} {{vehicule.transmission}}</p>
+                      <figure>
+                          <img src="/media/{{vehicule.image}}" alt="">
+                      </figure>
+                      <figcaption>
+                          <div class="brand">
+                              <h4>{{vehicule.marque}}</h4>
+                              <p>{{vehicule.modele}}</p>
+                          </div>
+                          <div class="modele">
+                              <p>{{vehicule.type_carburant}}</p>
+                              <p>{{vehicule.kilometrage}} km</p>
+                          </div>
+                      </figcaption>
+                      {% if user.role != "ADMIN"%}
+                        {%if vehicule.statut == "Disponible"%}
+                        <a class="carRequest" href="/reserve/car/{{vehicule.id}}/{{user.username}}">Send Request</a>
+                        {%else%}
+                        <a class="carRequest">Disponible Soon</a>
+                        {% endif %}
+                      {%endif%}
+                      </article>
+                  {%endif%}
+                {% endfor %}
+            </section>
+        </main>
+
+<div class="modal" id="rapportModal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeRapport()">&times;</span>
+    <form action="/rapport/annuel" method="POST">
+      {% csrf_token %}
+      <section class="rapportGenerate">
+      <input type="month" name="date" id="rapportDate" required>
+      <button type="submit">Générer</button>
+    </section>
+    </form>
+  </div>
+</div>
+
+        <script src="{%static 'js/rapportDrop.js'%}"></script>
+</body>
+</html>

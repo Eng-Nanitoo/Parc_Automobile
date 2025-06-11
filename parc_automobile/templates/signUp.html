@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="{% static 'css/signIn.css' %}">
 </head>
 <body>
+    {% if messages %}
+    {%for message in messages%}
+        <div class="error">
+            <p>{{messages}}</p>
+        </div>
+    {%endfor%}
+    {% endif %}
     <main>
         <form action="/user/auth/register" method="POST">
             {% csrf_token %}

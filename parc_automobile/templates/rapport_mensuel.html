@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Financier - {{ mois }}/{{ annee }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td:first-child, th:first-child {
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f4f6f8;
+        }
+
+        td strong {
+            color: #e67e22;
+        }
+
+        tfoot td {
+            font-weight: bold;
+            background-color: #ecf0f1;
+        }
+        @media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    button {
+        display: none;
+    }
+
+    table {
+        box-shadow: none;
+    }
+
+    h1 {
+        color: black;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+<h1>Rapport Financier - {{ mois }}/{{ annee }}</h1>
+<div style="text-align: center; margin-bottom: 20px;">
+    <button onclick="window.print()" style="padding: 10px 20px; background-color: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        🖨️ Imprimer le rapport
+    </button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Véhicule</th>
+            <th>Km</th>
+            <th>Carburant (MRU)</th>
+            <th>Maintenance (MRU)</th>
+            <th>Assurance (MRU)</th>
+            <th>Autres (MRU)</th>
+            <th>Total (MRU)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ligne in data %}
+        <tr>
+            <td>{{ ligne.vehicule }}</td>
+            <td>{{ ligne.km }}</td>
+            <td>{{ ligne.carburant }}</td>
+            <td>{{ ligne.maintenance }}</td>
+            <td>{{ ligne.assurance }}</td>
+            <td>{{ ligne.autres }}</td>
+            <td><strong>{{ ligne.total }}</strong></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    {% if total_general %}
+    <tfoot>
+        <tr>
+            <td colspan="6" style="text-align:right;">Total général :</td>
+            <td><strong>{{ total_general }}</strong></td>
+        </tr>
+    </tfoot>
+    {% endif %}
+</table>
+<a href="/rapport/excel/{{mois}}/{{annee}}">Exporter en excel</a>
+<a href="/rapport/word/{{mois}}/{{annee}}">Exporter en word</a>
+</body>
+</html>

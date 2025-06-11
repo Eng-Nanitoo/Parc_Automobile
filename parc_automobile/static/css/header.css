@@ -1,0 +1,75 @@
+header {
+    padding: 1rem 4rem;
+}
+header .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+header * {
+    color: #fff;
+}
+
+header h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+header .division {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+header .search {
+    margin-top: 20px;
+}
+header .search form {
+    position: relative;
+}
+header .search form label {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+}
+header .search form label i {
+    font-size: 1.1em;
+    color: #e8e8e8;
+    opacity: .6;
+
+}
+
+header .search form input{
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: .5px solid #e8e8e8;
+    background-color: #333;
+    color: #c9c9c9;
+}
+header .search form input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+header .division div h1 {
+    color: gold;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+header .division nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+}
+header .division nav ul li a{
+    font-size: .9em;
+}
+
+nav input[type="search"] {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <section class="vehicule">
+                <figure>
+                    <img src="audi.jpg" alt="">
+                    <figcaption>
+                        <h3>{{vehicule.marque}} {{vehicule.modele}}</h3>
+                        <p>{{vehicule.date_achat}}</p>
+                    </figcaption>
+                </figure>
+            </section>
+            <section class="form">
+                <div class="infos">
+                    <label for="">
+                        Marque <input type="text" name="marque" value="{{vehicule.marque}}" id="">
+                    </label>
+                    <label for="">
+                        Modele <input type="text" name="modele" value="{{vehicule.modele}}" id="">
+                    </label>
+                    <label for="">
+                        Immatriculation <input type="text" name="immatruculation" value="{{vehicule.modele}}" id="">
+                    </label>
+                    <label for="">
+                        Type <input type="text" name="type_vehicule" value="{{vehicule.modele}}" id="">
+                    </label>
+                    <label for="">
+                        Kilometrage <input type="text" name="kilometrage" value="{{vehicule.modele}}" id="">
+                    </label>
+                    <label for="">
+                        Transmission <input type="text" name="transmission" value="{{vehicule.modele}}" id="">
+                    </label>
+                    <label for="">
+                        Type Carburant <input type="date" name="type_carburant" value="{{vehicule.date_achat}}" id="">
+                    </label>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" class="save">Save</button>
+                    <a href="/dashbord" class="cancel">Cancel</a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

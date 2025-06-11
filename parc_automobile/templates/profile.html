@@ -1,54 +1,91 @@
 {%load static%}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content = "width=device-width, initial-scale=1.0">
-  <title>Profil Utilisateur</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/profile.css'%}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/profile.css'%}">
 </head>
 <body>
 
-  <div class="sidebar">
-    <h2><a href="/home">{{user.username}}</a></h2>
-    <a href="#">Tableau de bord</a>
-    <a href="#">Profil</a>
-    <a href="#">Paramètres</a>
-    <a href="/auth/logout">Déconnexion</a>
-  </div>
+        <main>
+            <section>
+              <a class="back" href="/dashbord"><i class='bx bx-arrow-back'></i> Go Back</a>
+                <div class="head">
+                    <img src="{%static 'images/bg-profile.avif'%}" alt="">
+                </div>
+                <form action="/update/profile" method="post" class="body">
+                  {%csrf_token%}
+                        <div class="nav">
+                            <div class="image">
+                                <img src="/media/{{user.image}}" alt="">
+                            </div>
+                            <div class="buttons">
+                                <a href=""><i class='bx bx-folder-minus'></i>Archive</a>
+                                <a href="">Orders</a>
+                            </div>
+                        </div>
+                        <div class="user_informations">
+                            <h2>{{user.nom}} {{user.prenom}}</h2>
+                            <p>@{{user.username}}</p>
+                        </div>
+                        <div class="user_infos">
+                            <section>
+                                <p>Last Seen</p>
+                                <h3>2025-12-09</h3>
+                            </section>
+                            <section>
+                                <p>Last Seen</p>
+                                <h3>2025-12-09</h3>
+                            </section>
+                            <section>
+                                <p>Last Seen</p>
+                                <h3>2025-12-09</h3>
+                            </section>
+                            <section>
+                                <p>Last Seen</p>
+                                <h3>2025-12-09</h3>
+                            </section>
+                        </div>
+                        <div class="user_data">
+                            <section>
+                                <label for="">Name</label>
+                                <div class="inputs">
+                                    <input type="text" name="nom" value="{{user.nom}}" placeholder="First name">
+                                    <input type="text" name="prenom" value="{{user.prenom}}" placeholder="Last name">
+                                </div>
+                            </section>
+                            <section>
+                                <label for="">Email adress</label>
+                                <div class="inputs">
 
-  <div class="main">
-    <div class="profile-container">
-      <h2>Profil Utilisateur</h2>
-      <form action="/update/profile" method="post" id="form">
-        {%csrf_token%}
-        <div class="form-group">
-          <label for="username">Nom d'utilisateur</label>
-          <input type="text" id="username" name="username" value="{{user.username}}">
-        </div>
-        <div class="form-group">
-          <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" value="{{user.nom}}">
-        </div>
-        <div class="form-group">
-          <label for="prenom">Prenom</label>
-          <input type="text" id="prenom" name="prenom" value="{{user.prenom}}">
-        </div>
-        <div class="form-group">
-          <label for="email">Adresse Email</label>
-          <input type="email" id="email" name="email" value="{{user.email}}">
-        </div>
-        <div class="form-group">
-          <label for="phone">Téléphone</label>
-          <input type="tel" id="phone" name="phone" value="{{user.phone}}" oninput="checkPhone()" maxlength="8">
-          <span id="phoneError"></span>
-        </div>
-        <button onclick="checkPhone()" class="submit-btn">Mettre à jour</button>
-      </form>
-    </div>
-  </div>
-  <script src="{%static 'js/profile.js'%}"></script>
+                                    <input type="email" name="email" value="{{user.email}}" placeholder="Email">
+                                </div>
+                            </section>
+                            <section>
+                                <label for="">Username</label>
+                                <div class="inputs">
+                                    <input type="text" name="username" placeholder="Username" value="{{user.username}}" >
+                                </div>
+                            </section>
+                            <section>
+                                <label for="">Phone</label>
+                                <div class="inputs">
+                                    <input type="text" name="phone" placeholder="Phone" value="{{user.phone}}" >
+                                </div>
+                            </section>
+                        </div>
 
+                        <div class="changes">
+                            <button type="reset">Cancel</button>
+                            <button type="submit">Save changes</button>
+                        </div>
+                    
+                </form>
+            </section>
+        </main>
 </body>
 </html>

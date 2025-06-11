@@ -11,6 +11,7 @@
 }
 
 body {
+    background-color: black;
     min-height: 100vh;
 
 }
@@ -41,11 +42,17 @@ main input {
     display: block;
     border: .5px solid #e8e8e8;
 }
+main form {
+    color: #fff;
+}
+main form input {
+    background-color: #ddd;
+}
 main form .image input {
     padding: 30px 20px;
 }
 main form div button {
-    background-color: rgb(46, 116, 254);
+    background-color: gold;
     color: #fff;
     border-radius: 3px;
     margin-top: 10px;

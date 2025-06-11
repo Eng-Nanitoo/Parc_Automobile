@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fff;
+    min-height: 100vh;
+}
+header {
+    background-color: #000;
+    padding: 1rem 4rem;
+}
+header .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+header * {
+    color: #fff;
+}
+
+header h1 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+header .division {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+header .search {
+    margin-top: 20px;
+}
+header .search form {
+    position: relative;
+}
+header .search form label {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+}
+header .search form label i {
+    font-size: 1.1em;
+    color: #e8e8e8;
+    opacity: .6;
+
+}
+
+header .search form input{
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: .5px solid #e8e8e8;
+    background-color: #333;
+    color: #c9c9c9;
+}
+header .search form input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+header .division div h1 {
+    color: gold;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+header .division nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+}
+header .division nav ul li a{
+    font-size: .9em;
+}
+
+nav input[type="search"] {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+}
+
+.buttons ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons ul li:not(:last-child) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.buttons img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+main {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 240px auto;
+    gap: 40px;
+    padding: 1rem 6rem;
+}
+main * {
+    color: #000;
+}
+
+main aside {
+    position: sticky;
+    top: 10px;
+    max-height: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 1px 20px 10px #e8e8e8;
+}
+
+main aside form > div:not(:last-child) {
+    margin-top: 10px;
+    padding-bottom: 15px;
+    border-bottom: .5px solid #e8e8e8;
+}
+main aside form .head {
+    display: flex;
+    justify-content: space-between;
+}
+main aside form .head h4 {
+    color: #000;
+}
+main aside form .head p {
+    color: #ff4141;
+    font-size: .8em;
+    font-weight: bold;
+}
+main aside form div select {
+    display: block;
+    width: 100%;
+    border: 1px solid rgb(255, 246, 71);
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+}
+main aside form div .choices {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    gap: 10px;
+}
+
+main aside form div .choices .choice input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 1px solid #ffe928;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+main aside form div .choices .choice input[type="checkbox"]:checked {
+    background-color: #ebc804; 
+    border-color: #ebc804;
+    position: relative;
+}
+
+
+main aside form div .choices .choice input[type="checkbox"]:checked::after {
+    content: "✔";
+    color: white;
+    position: absolute;
+    left: 2px;
+    top: -1px;
+    font-size: 12px;
+}
+main aside form div .choices .choice {
+    font-size: .8em;
+    display: flex;
+    gap: 5px;
+}
+main aside form > div:last-child {
+    padding-block: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main aside form div button {
+    
+    border-radius: 5px;
+    padding: 5px 30px;
+    background-color: #ebc804;
+    color: #ffffff;
+}
+
+
+/* Section Container in Main */
+main .container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 20px;
+} 
+main .container article {
+    max-width: 310px;
+    min-height: 400px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 1px 20px 10px #e8e8e8;
+}
+main .container article * {
+    color: #000;
+}
+main .container article > p {
+    opacity: .5;
+    font-size: .8em;
+}
+main .container article figure {
+    margin-block: 8px;
+    width: 250px;
+    height: 250px;
+}
+
+main .container article figure img {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+main .container article figcaption {
+
+    display: flex;
+    justify-content: space-between;
+}
+main .container article figcaption p {
+    margin-block: 5px;
+    font-size: .8em;
+    opacity: .8;
+}
+main .container article .carRequest{
+    border-radius: 3px;
+    background-color: #101010;
+    color: #ddd;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 10px; 
+}
+
+
+
+.rapportGenerate{
+
+    background-color: #fefefe;
+    max-width: 400px;
+}
+.rapportGenerate input {
+    color: #444;
+    min-width: 200px;
+    border: .5px solid #e8e8e8;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+.rapportGenerate button {
+    cursor: pointer;
+    margin-left: 10px;
+    background-color: #101010;
+    color: #e9e9e9;
+    padding: 6px 25px;
+    border-radius: 3px;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0; top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+}
+
+
+/* ===== Responsive minimal ===== */
+
+@media (max-width: 1024px) {
+  main {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  aside {
+    width: 100% !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)) !important;
+    gap: 1rem !important;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header .division {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  header .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  nav ul {
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .buttons ul {
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .search form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .buttons ul {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  aside {
+    padding: 0.8rem;
+  }
+
+  .container {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .search {
+    padding: 0.5rem 1rem;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+}
