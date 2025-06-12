@@ -330,6 +330,49 @@ main .container article .carRequest{
     color: #666;
 }
 
+.notification-wrapper {
+    position: relative;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    border: 1px solid #ddd;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    color: #333;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item.error {
+    color: red;
+}
+
+.notification-item.warning {
+    color: orange;
+}
+
+.notification-item.info {
+    color: blue;
+}
+
+
 
 /* ===== Responsive minimal ===== */
 

@@ -21,6 +21,15 @@ def send_user_email(sender, instance, created, **kwargs):
         )
 
 
+@receiver(post_save, sender=Maintenance)
+def change_vehicule_status(sender, instance, created, **kwargs):
+    vehicule = instance.vehicule
+    depense = Depense.objects.create(vehicule=vehicule,categorie=instance.type_maintenance,montant=instance.cout,date_depense=instance.date,description=instance.description)
+    depense.save()
+
+    vehicule.statut = "En maintenance"
+    vehicule.save()
+
 @receiver(user_logged_in)
 def check_permis_validate(sender, request, user, **kwargs):
     if hasattr(user, 'date_validite_permis') and user.date_validite_permis:

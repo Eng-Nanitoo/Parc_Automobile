@@ -18,6 +18,28 @@ from .models import Vehicule, Trajet, Maintenance, Depense
 User = get_user_model()
 
 
+def addTrajet(request):
+    if request.method=="POST":
+        vehicule = Vehicule.objects.get(id=request.POST['vehicule'])
+        kilometrage_parcouru = request.POST['kilometrage_parcouru']
+        consommation_carburant = request.POST['consommation_carburant']
+        date_depart = request.POST['date_depart']
+        date_arrivee = request.POST['date_arrivee']
+
+        try:
+            trajet = Trajet.objects.create(Utilisateur=request.user,vehicule=vehicule,kilometrage_parcouru=kilometrage_parcouru,consommation_carburant=consommation_carburant,date_depart=date_depart,date_arrivee=date_arrivee)
+            trajet.save()
+            messages.info(request, "Votre Trajet a Bien etre Enregistres")
+        except Exception:
+            messages.error(request, "Error Something Went Wrong")
+
+        return redirect('/ajouter/Trajet')
+
+
+def ajouterPageTrajet(request):
+    vehicules = Vehicule.objects.all()
+    return render(request,'addTrajet.html',{'vehicules':vehicules})
+
 def getVehicule(request,pk):
     vehicule = get_object_or_404(Vehicule,id=pk)
     return render(request,'vehicule.hmtl', {'vehicule':vehicule})
@@ -228,7 +250,8 @@ def modifieVehicule(request, pk):
         vehicule.marque = request.POST['marque']
         vehicule.modele = request.POST['modele']
         vehicule.immatriculation = request.POST['immatrucilation']
-        vehicule.date_achat = request.POST['date_achat']
+        if request.POST['date_achat']:
+            vehicule.date_achat = request.POST['date_achat']
         vehicule.kilometrage = request.POST['kilometrage']
         vehicule.type_vehicule = request.POST['type_carburant']
         vehicule.statut = request.POST['statut']
@@ -269,20 +292,13 @@ def addConducteur(request):
 
 @login_required
 def modifieConducteur(request, pk):
-    Utilisateur = get_object_or_404(Utilisateur, id=pk)
     if request.method == "POST":
-        Utilisateur.nom = request.POST['nom'],
-        Utilisateur.prenom = request.POST['prenom'],
-        Utilisateur.numero_permis = request.POST['numero_permis'],
-        Utilisateur.date_validite_permis = request.POST['date_validite_permis'],
-        Utilisateur.image = request.FILES.get('image')
-
-        if request.FILES.get('image'):
-            Utilisateur.image = request.FILES['image']
-
-        Utilisateur.save()
-        return redirect('/Utilisateurs')
-    
+        user = get_object_or_404(User, id=pk)
+        can_drive_value = request.POST.get("can_drive")
+        user.canDrive = can_drive_value == "yes"
+        user.save()
+        return redirect(request.META.get("HTTP_REFERER", "/"))
+        
     return render(request, '404.html')
 
 @login_required
@@ -311,7 +327,7 @@ def userLogin(request):
         password = request.POST['password']
         
         user = authenticate(request,username=username, password=password)
-       
+        
 
         if user is None:
 
@@ -354,7 +370,6 @@ def userRegister(request):
 
 def userLogout(request):
     auth.logout(request)
-    # method yngalhe logout v class auth mn 5ilalhe ndeconnectou regaj
     return redirect('/auth/login')
 
 @login_required
@@ -382,6 +397,7 @@ def updateProfile(request):
         prenom = request.POST['prenom']
         phone = request.POST['phone']
         email = request.POST['email']
+        image = request.FILES.get('image')
         
 
 
@@ -390,6 +406,8 @@ def updateProfile(request):
         user.prenom = prenom
         user.email = email
         user.phone = phone
+        if image:
+            user.image=image
 
         user.save()
 
@@ -589,7 +607,6 @@ def rapport_mensuel(request, annee, mois):
         })
 
     return render(request, 'rapport_mensuel.html', {'data': data, 'mois': mois, 'annee': annee})
-
 
 
 def programmerMaintenance(request):

@@ -1,0 +1,56 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/addTrajet.css'%}">
+</head>
+<body>
+
+        <main>
+        <form action="/add/Trajet" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="grid1">
+                <div>
+                    <label for="">Vehicule</label>
+                    <select name="vehicule" id="" required>
+                        {% for vehicule in vehicules%}
+                        <option value="{{vehicule.id}}">{{vehicule.marque}} {{vehicule.modele}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div>
+                    <label for="">Kilometrage Parcouru</label>
+                    <input type="text" name="kilometrage_parcouru">
+                </div>
+                <div>
+                    <label for="">Consommation Carburant</label>
+                    <input type="text" name="consommation_carburant" id="" required>
+                </div>
+            </div>
+            <div class="grid2">
+                <div>
+                    <label for="">Date Depart</label>
+                    <input type="date" name="date_depart" id="" required>
+                </div>
+                <div>
+                    <label for="">Date Arrivee</label>
+                    <input type="date" name="date_arrivee" id="" required>
+                </div>
+            </div>
+            <div>
+                <button type="submit">Enregistrer</button>
+            </div>
+        </form>
+    </main>
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                alert("{{ message|escapejs }}");
+            {% endfor %}
+        </script>
+    {% endif %}
+</body>
+</html>

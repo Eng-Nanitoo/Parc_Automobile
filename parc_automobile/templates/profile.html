@@ -15,9 +15,9 @@
             <section>
               <a class="back" href="/dashbord"><i class='bx bx-arrow-back'></i> Go Back</a>
                 <div class="head">
-                    <img src="{%static 'images/bg-profile.avif'%}" alt="">
+                    <img src="{%static 'images/bg.jpg'%}" alt="">
                 </div>
-                <form action="/update/profile" method="post" class="body">
+                <form action="/update/profile" method="post" class="body" enctype="multipart/form-data">
                   {%csrf_token%}
                         <div class="nav">
                             <div class="image">
@@ -35,19 +35,11 @@
                         <div class="user_infos">
                             <section>
                                 <p>Last Seen</p>
-                                <h3>2025-12-09</h3>
+                                <h3>{{user.last_login}}</h3>
                             </section>
                             <section>
-                                <p>Last Seen</p>
-                                <h3>2025-12-09</h3>
-                            </section>
-                            <section>
-                                <p>Last Seen</p>
-                                <h3>2025-12-09</h3>
-                            </section>
-                            <section>
-                                <p>Last Seen</p>
-                                <h3>2025-12-09</h3>
+                                <p>Date Joined</p>
+                                <h3>{{user.date_joined}}</h3>
                             </section>
                         </div>
                         <div class="user_data">
@@ -75,6 +67,12 @@
                                 <label for="">Phone</label>
                                 <div class="inputs">
                                     <input type="text" name="phone" placeholder="Phone" value="{{user.phone}}" >
+                                </div>
+                            </section>
+                            <section>
+                                <label for="">Image</label>
+                                <div class="inputs">
+                                    <input type="file" name="image" placeholder="Phone" value="{{user.phone}}" >
                                 </div>
                             </section>
                         </div>

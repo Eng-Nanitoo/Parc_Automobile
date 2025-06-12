@@ -17,7 +17,8 @@ urlpatterns = [
     path('rapport/<int:annee>/excel/', views.export_rapport_annuel_excel, name='rapport_annuel_excel'),
     path('rapport/<int:annee>/word/', views.export_rapport_annuel_word, name='rapport_annuel_word'),
     path('vehicule/<str:pk>', views.getVehicule),
-
+    path('ajouter/Trajet',views.ajouterPageTrajet),
+    path('add/Trajet',views.addTrajet),
     # User register and login paths
     path('auth/login', views.login),
     path('auth/register', views.register),

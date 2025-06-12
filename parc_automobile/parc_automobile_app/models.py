@@ -61,10 +61,10 @@ class Utilisateur(AbstractUser):
         ('GESTIONNAIRE', 'Gestionnaire'),
         ('ADMIN', 'Admin'),
     ]
-    canDrive = models.BooleanField(null=True)
+    canDrive = models.BooleanField(default=True)
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES,default="CONDUCTEUR")
-    
+
 class Trajet(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     Utilisateur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)

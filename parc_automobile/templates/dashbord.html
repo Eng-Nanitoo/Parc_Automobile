@@ -18,24 +18,43 @@
                     </div>
                     <nav>
                         <ul>
-                            <li><a href="">Home</a></li>
+                            <li><a href="/home">Home</a></li>
                             <li><a href="">Vehicules</a></li>
                             <li><a href="/conducteurs">Conducteurs</a></li>
                             {%if user.role == "ADMIN"%}
                               <li><a href="/ajouter/vehicule">Ajouter Vehicule</a></li>
                               <li><a href="#" onclick="dropRapport(); return false;">Rapports</a></li>
-                            {%endif%}
-                            {%if user.role == "GESTIONNAIRE"%}
+                              {%endif%}
+                              {%if user.role == "GESTIONNAIRE"%}
                               <li><a href="/Programmer/maintenance">Programmer Maintenance</a></li>
-                            {%endif%}
-                            <li><a href="">Settings</a></li>
+                              {%endif%}
+                              {%if user.role == "CONDUCTEUR"%}
+                              <li><a href="/ajouter/Trajet">Ajouter Trajet</a></li>
+                              {%endif%}
+                            <li><a href="/auth/logout">Log out</a></li>
+                            <li><a href="/profile/{{user.username}}">Settings</a></li>
                         </ul>
                       </nav>
                     </div>
                 <div class="buttons">
                     <ul>
                         <li><a href=""><i class='bx bxs-envelope'></i></a></li>
-                        <li><a onclick="dropNotification()" style="cursor:pointer"><i class='bx bxs-bell'></i></a></li>
+<li class="notification-wrapper">
+    <a onclick="dropNotification()" style="cursor:pointer; position: relative;">
+        <i class='bx bxs-bell'></i>
+    </a>
+    <div id="notificationDropdown" class="notification-dropdown">
+        {% if notifications %}
+            {% for notification in notifications %}
+                <div class="notification-item {{ message.tags }}">
+                    {{ notification.description }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="notification-item">Aucune notification</div>
+        {% endif %}
+    </div>
+</li>
                         <li><a href="/profile/{{user.username}}"><img src="/media/{{user.image}}" alt=""></a></li>
                     </ul>
                 </div>
@@ -195,5 +214,21 @@
 </div>
 
         <script src="{%static 'js/rapportDrop.js'%}"></script>
+                <script>
+            function dropNotification() {
+                const dropdown = document.getElementById("notificationDropdown");
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            }
+
+            // Optional: click outside to close
+            document.addEventListener('click', function(event) {
+                const dropdown = document.getElementById("notificationDropdown");
+                const bell = document.querySelector('.notification-wrapper');
+
+                if (!bell.contains(event.target)) {
+                    dropdown.style.display = "none";
+                }
+            });
+        </script>
 </body>
 </html>

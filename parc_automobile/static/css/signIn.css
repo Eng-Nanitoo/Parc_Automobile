@@ -15,8 +15,14 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+        /* background: url("https://img.pikbest.com/backgrounds/20200229/black-texture-gradient-background-promotion-main-image_2847481.jpg!w700wp"); */
+
 }
 
+h1 {
+    font-family: courier;
+    
+}
 .error {
     border-radius: 5px;
     background-color: #ffefef;
@@ -29,13 +35,15 @@ body {
 
 main {
     padding: 30px 20px;
-    width: 30%;
+    width: 35%;
     margin-inline: auto;
     border: .25px solid #c5c5c5;
-    border-radius: 5px;
+    border-radius: 3px;
+    background-color: #fff;
     /* box-shadow:  0px .5px 5px .5px #e9e9e9; */
 }
 main form {
+    width: 100%;
     display: grid;
     gap: 20px;
     justify-content:  center;
@@ -55,8 +63,8 @@ main form div button {
     width: 100%;
     padding: 10px 15px;
     border-radius: 5px;
-    color: rgb(255, 255, 255);
-    background-color: #03193d;
+    color: #cbaf15;
+    background-color: #000;;
 }
 main form div a {
     font-size: clamp(.7em, .75em,.85em);

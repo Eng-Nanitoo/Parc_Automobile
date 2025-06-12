@@ -16,6 +16,7 @@
     {% endif %}
     <main>
         <form action="/user/auth/login" method="POST">
+            <h2>Parc Automobile</h2>
             {% csrf_token %}
             <div class="username">
                 <input type="text" name="username" placeholder="Nom de profil" required>
