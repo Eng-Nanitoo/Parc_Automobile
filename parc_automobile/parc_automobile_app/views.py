@@ -1,7 +1,7 @@
-from docx import Document
-from docx.shared import Inches
-import openpyxl
-from openpyxl.styles import Font
+from docx import Document # type: ignore
+from docx.shared import Inches # type: ignore
+import openpyxl # type: ignore
+from openpyxl.styles import Font # type: ignore
 from django.core.mail import send_mail
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages,auth
@@ -500,7 +500,7 @@ def export_word(request, mois, annee):
         row_cells[5].text = str(ligne['autres'])
         row_cells[6].text = str(ligne['total'])
 
-    # Total général
+    
     doc.add_paragraph(f"\nTotal général : {total_general} MRU")
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
@@ -552,7 +552,7 @@ def export_excel(request, mois, annee):
     for cell in ws[1]:
         cell.font = Font(bold=True)
 
-    # Lignes de données
+    # Ligne de données
     for ligne in data:
         ws.append([
             ligne['vehicule'],
@@ -564,10 +564,10 @@ def export_excel(request, mois, annee):
             ligne['total'],
         ])
 
-    # Total général
+    # Total general
     ws.append([""] * 6 + [f"{total_general}"])
 
-    # Réponse HTTP
+    # Reponse HTTP
     response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
     filename = f"rapport_{mois}_{annee}.xlsx"
     response["Content-Disposition"] = f'attachment; filename="{filename}"'

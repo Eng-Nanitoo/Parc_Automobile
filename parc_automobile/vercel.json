@@ -1,0 +1,14 @@
+{
+    "builds": [
+        {
+            "src": "parc_automobile/wsgi.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "parc_automobile/wsgi.py"
+        }
+    ]
+}

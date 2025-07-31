@@ -1,0 +1,11 @@
+asgiref==3.8.1
+Django==5.2
+django-browser-reload==1.18.0
+et_xmlfile==2.0.0
+lxml==5.4.0
+openpyxl==3.1.5
+pillow==11.2.1
+python-docx==1.1.2
+sqlparse==0.5.3
+typing_extensions==4.14.0
+tzdata==2025.2

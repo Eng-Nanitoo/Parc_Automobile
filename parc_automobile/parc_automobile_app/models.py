@@ -101,4 +101,4 @@ class Notification(models.Model):
     whom = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     type = models.CharField(max_length=100)
     description = models.TextField()
-    when = models.DateTimeField(auto_now_add=True)
+    when = models.DateField()

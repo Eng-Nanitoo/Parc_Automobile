@@ -32,7 +32,7 @@ def change_vehicule_status(sender, instance, created, **kwargs):
 
 @receiver(user_logged_in)
 def check_permis_validate(sender, request, user, **kwargs):
-    if hasattr(user, 'date_validite_permis') and user.date_validite_permis:
+    if hasattr(user, 'date_validite_permis') and user.date_validite_permis and user.role == "CONDUCTEUR":
         today = now().date()
         days = (user.date_validite_permis - today).days
 
@@ -42,16 +42,8 @@ def check_permis_validate(sender, request, user, **kwargs):
                 f"Votre permis expire dans {days} jour(s). Veuillez le renouveler bientôt."
             )
 
-            if days <= 5 and not Notification.objects.filter(
-                whom=user,
-                when=today
-            ).exists():
-                Notification.objects.create(
-                    whom=user,
-                    type="Expire Permis",
-                    description=f"Bienvenue {user.nom}, votre permis expire dans {days} jour(s).",
-                    when=today
-                )
+            if days <= 5 and not Notification.objects.filter(whom=user,when=today).exists():
+                Notification.objects.create(whom=user,type="Expire Permis",description=f"Bienvenue {user.nom}, votre permis expire dans {days} jour(s).",when=today).save()
 
         elif days < 0:
             messages.error(
